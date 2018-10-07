@@ -32,7 +32,7 @@ def _show_node(node):
            metavar='<node-id>',
            help='ID or name of the node to show.')
 def do_node_show(cs, args):
-    """Show details of a container."""
+    """Show details of a Node."""
     opts = {}
     opts['node_id'] = args.node_id
     opts = gyan_utils.remove_null_parms(**opts)

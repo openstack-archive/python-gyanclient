@@ -27,7 +27,7 @@ class Client(object):
                  interface='public', insecure=False, password=None,
                  project_domain_id=None, project_domain_name=None,
                  project_id=None, project_name=None, region_name=None,
-                 service_name=None, service_type='container', session=None,
+                 service_name=None, service_type='ml', session=None,
                  user_domain_id=None, user_domain_name=None,
                  username=None, cacert=None, **kwargs):
         """Initialization of Client object.
@@ -116,8 +116,8 @@ class Client(object):
                                                     session=session,
                                                     api_version=api_version,
                                                     **client_kwargs)
-        self.containers = nodes.NodeManager(self.http_client)
-        self.images = models.ModelManager(self.http_client)
+        self.nodes = nodes.NodeManager(self.http_client)
+        self.models = models.ModelManager(self.http_client)
         self.versions = versions.VersionManager(self.http_client)
 
     @property

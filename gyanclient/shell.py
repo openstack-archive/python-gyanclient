@@ -307,7 +307,7 @@ class OpenStackGyanShell(object):
 
         parser.add_argument('--service-type',
                             metavar='<service-type>',
-                            help='Defaults to container for all '
+                            help='Defaults to ml  for all '
                                  'actions.')
         parser.add_argument('--service_type',
                             help=argparse.SUPPRESS)

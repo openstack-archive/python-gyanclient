@@ -50,7 +50,7 @@ def do_model_delete(cs, args):
            metavar='<model-id>',
            help='ID or name of the model to show.')
 def do_model_show(cs, args):
-    """Show details of a container."""
+    """Show details of a models."""
     opts = {}
     opts['model_id'] = args.model_id
     opts = gyan_utils.remove_null_parms(**opts)
@@ -103,7 +103,7 @@ def do_model_list(cs, args):
            metavar='<ml_file>',
            help='The ML model file to be trained')
 def do_train_model(cs, args):
-    """Remove security group for specified container."""
+    """Remove security group for specified model."""
     opts = {}
     opts['name'] = args.name
     opts = gyan_utils.remove_null_parms(**opts)

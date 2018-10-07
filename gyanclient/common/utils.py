@@ -25,22 +25,13 @@ from gyanclient.common import cliutils as utils
 from gyanclient import exceptions as exc
 from gyanclient.i18n import _
 
-VALID_UNITS = (
-    K,
-    M,
-    G,
-) = (
-    1024,
-    1024 * 1024,
-    1024 * 1024 * 1024,
-)
 
 
 def common_filters(marker=None, limit=None, sort_key=None,
                    sort_dir=None, all_projects=False):
     """Generate common filters for any list request.
 
-    :param all_projects: list containers in all projects or not
+    :param all_projects: list models in all projects or not
     :param marker: entity ID from which to start returning entities.
     :param limit: maximum number of entities to return.
     :param sort_key: field to use for sorting.
