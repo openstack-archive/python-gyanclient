@@ -24,23 +24,23 @@ from gyanclient.common import utils as gyan_utils
 from gyanclient import exceptions as exc
 
 
-def _show_node(node):
-    utils.print_dict(node._info)
+def _show_host(host):
+    utils.print_dict(host._info)
 
 
-@utils.arg('node-id',
-           metavar='<node-id>',
-           help='ID or name of the node to show.')
-def do_node_show(cs, args):
-    """Show details of a Node."""
+@utils.arg('host-id',
+           metavar='<host-id>',
+           help='ID or name of the host to show.')
+def do_host_show(cs, args):
+    """Show details of a Host."""
     opts = {}
-    opts['node_id'] = args.node_id
+    opts['host_id'] = args.host_id
     opts = gyan_utils.remove_null_parms(**opts)
-    node = cs.nodes.get(**opts)
-    _show_node(node)
+    host = cs.hosts.get(**opts)
+    _show_host(host)
 
 
-def do_node_list(cs, args):
-    """List Nodes"""
-    nodes = cs.nodes.list_nodes()
-    gyan_utils.list_nodes(nodes)
+def do_host_list(cs, args):
+    """List Hosts"""
+    hosts = cs.hosts.list_hosts()
+    gyan_utils.list_hosts(hosts)

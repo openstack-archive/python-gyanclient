@@ -18,31 +18,31 @@ from gyanclient.common import utils
 from gyanclient import exceptions
 
 
-class Node(base.Resource):
+class Host(base.Resource):
     def __repr__(self):
-        return "<Node %s>" % self._info
+        return "<Host %s>" % self._info
 
 
-class NodeManager(base.Manager):
-    resource_class = Node
+class HostManager(base.Manager):
+    resource_class = Host
 
     @staticmethod
     def _path(id=None):
 
         if id:
-            return '/v1/ml-nodes/%s' % id
+            return '/v1/hosts/%s' % id
         else:
-            return '/v1/ml-nodes'
+            return '/v1/hosts'
 
-    def list_nodes(self, **kwargs):
-        """Retrieve a list of Nodes.
+    def list_hosts(self, **kwargs):
+        """Retrieve a list of Hosts.
 
-        :returns: A list of nodes.
+        :returns: A list of hosts.
 
         """
 
         return self._list_pagination(self._path(''),
-                                     "nodes")
+                                     "hosts")
 
     def get(self, id):
         try:

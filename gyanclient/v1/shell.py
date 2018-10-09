@@ -10,12 +10,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from gyanclient.v1 import nodes_shell
+from gyanclient.v1 import hosts_shell
 from gyanclient.v1 import models_shell
 from gyanclient.v1 import versions_shell
 
 COMMAND_MODULES = [
-    nodes_shell,
+    hosts_shell,
     models_shell,
     versions_shell
 ]

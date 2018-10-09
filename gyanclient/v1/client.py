@@ -14,7 +14,7 @@ from keystoneauth1 import loading
 from keystoneauth1 import session as ksa_session
 
 from gyanclient.common import httpclient
-from gyanclient.v1 import nodes
+from gyanclient.v1 import hosts
 from gyanclient.v1 import models
 from gyanclient.v1 import versions
 
@@ -116,7 +116,7 @@ class Client(object):
                                                     session=session,
                                                     api_version=api_version,
                                                     **client_kwargs)
-        self.nodes = nodes.NodeManager(self.http_client)
+        self.hosts = hosts.HostManager(self.http_client)
         self.models = models.ModelManager(self.http_client)
         self.versions = versions.VersionManager(self.http_client)
 
