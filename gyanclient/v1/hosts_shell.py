@@ -28,15 +28,13 @@ def _show_host(host):
     utils.print_dict(host._info)
 
 
-@utils.arg('host-id',
+@utils.arg('host_id',
            metavar='<host-id>',
            help='ID or name of the host to show.')
 def do_host_show(cs, args):
     """Show details of a Host."""
     opts = {}
-    opts['host_id'] = args.host_id
-    opts = gyan_utils.remove_null_parms(**opts)
-    host = cs.hosts.get(**opts)
+    host = cs.hosts.get(args.host_id)
     _show_host(host)
 
 
