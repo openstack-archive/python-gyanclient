@@ -1,0 +1,3 @@
+#!/bin/sh
+
+oslo-config-generator --config-file=tools/gyan-config-generator.conf
