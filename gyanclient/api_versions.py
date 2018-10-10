@@ -238,7 +238,7 @@ def update_headers(headers, api_version):
 
     if not api_version.is_null() and api_version.ver_minor != 0:
         version_string = api_version.get_string()
-        headers[HEADER_NAME] = '%s %s' % (SERVICE_TYPE, version_string)
+        #headers[HEADER_NAME] = '%s %s' % (SERVICE_TYPE, version_string)
 
 
 def _add_substitution(versioned_method):

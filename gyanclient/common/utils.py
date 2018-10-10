@@ -123,7 +123,7 @@ def remove_null_parms(**kwargs):
     return new
 
 
-def list_nodes(nodes):
+def list_hosts(nodes):
     columns = ('uuid', 'name', 'type', 'status')
     utils.print_list(nodes, columns,
                      {'versions': print_list_field('versions')},
