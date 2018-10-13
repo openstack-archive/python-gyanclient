@@ -18,15 +18,6 @@ from gyanclient.common import utils
 from gyanclient import exceptions
 
 
-CREATION_ATTRIBUTES = ['name', 'image', 'command', 'cpu', 'memory',
-                       'environment', 'workdir', 'labels', 'image_pull_policy',
-                       'restart_policy', 'interactive', 'image_driver',
-                       'security_groups', 'hints', 'nets', 'auto_remove',
-                       'runtime', 'hostname', 'mounts', 'disk',
-                       'availability_zone', 'auto_heal', 'privileged',
-                       'exposed_ports', 'healthcheck']
-
-
 class Model(base.Resource):
     def __repr__(self):
         return "<Model %s>" % self._info
@@ -39,9 +30,9 @@ class ModelManager(base.Manager):
     def _path(id=None):
 
         if id:
-            return '/v1/ml-models/%s' % id
+            return '/v1/ml_models/%s' % id
         else:
-            return '/v1/ml-models'
+            return '/v1/ml_models'
 
     def list_models(self, **kwargs):
         """Retrieve a list of Models.
@@ -51,7 +42,7 @@ class ModelManager(base.Manager):
         """
 
         return self._list_pagination(self._path(''),
-                                     "models")
+                                     "ml_models")
 
     def get(self, id):
         try:
@@ -59,11 +50,13 @@ class ModelManager(base.Manager):
         except IndexError:
             return None
 
-    def model_train(self, **kwargs):
+    def model_create(self, **kwargs):
         new = {}
-        new['name'] = kwargs["name"]
-        new['ml_file'] = kwargs["ml_file"]
-        return self._create(self._path(), new)
+        new["name"] = kwargs["name"]
+        new["type"] = kwargs["type"]
+        model = self._create(self._path(), new)
+        upload_trained_model = kwargs['trained_model']
+        return self._create_and_upload(self._path(model.id)+'/upload_trained_model', upload_trained_model)
 
     def delete_model(self, id):
         return self._delete(self._path(id))
@@ -81,32 +74,3 @@ class ModelManager(base.Manager):
 
     def undeploy_model(self, id):
         return self._action(id, '/unstop')
-
-    def rebuild(self, id, **kwargs):
-        return self._action(id, '/rebuild',
-                            qparams=kwargs)
-
-    def restart(self, id, timeout):
-        return self._action(id, '/reboot',
-                            qparams={'timeout': timeout})
-
-    def pause(self, id):
-        return self._action(id, '/pause')
-
-    def unpause(self, id):
-        return self._action(id, '/unpause')
-
-    def logs(self, id, **kwargs):
-        if kwargs['stdout'] is False and kwargs['stderr'] is False:
-            kwargs['stdout'] = True
-            kwargs['stderr'] = True
-        return self._action(id, '/logs', method='GET',
-                            qparams=kwargs)[1]
-
-    def execute(self, id, **kwargs):
-        return self._action(id, '/execute',
-                            qparams=kwargs)[1]
-
-    def execute_resize(self, id, exec_id, width, height):
-        self._action(id, '/execute_resize',
-                     qparams={'exec_id': exec_id, 'w': width, 'h': height})[1]

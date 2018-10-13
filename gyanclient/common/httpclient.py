@@ -378,7 +378,22 @@ class SessionClient(adapter.LegacyJsonAdapter):
         kwargs.setdefault('headers', {})
         kwargs['headers'].setdefault('Content-Type',
                                      'application/octet-stream')
-        return self._http_request(url, method, **kwargs)
+        kwargs['headers'].setdefault('Accept', 'application/json')
+        resp = self._http_request(url, method, **kwargs)
+        body = resp.content
+        content_type = resp.headers.get('content-type', None)
+        status = resp.status_code
+        if status == 204 or status == 205 or content_type is None:
+            return resp, list()
+        if 'application/json' in content_type:
+            try:
+                body = resp.json()
+            except ValueError:
+                LOG.error('Could not decode response body as JSON')
+        else:
+            body = None
+
+        return resp, body
 
 
 class ResponseBodyIterator(object):

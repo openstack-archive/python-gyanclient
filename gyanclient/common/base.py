@@ -49,6 +49,11 @@ class Manager(object):
         if body:
             return self.resource_class(self, body)
 
+    def _create_and_upload(self, url, data):
+        resp, body = self.api.raw_request('POST', url, data=data)
+        if body:
+            return self.resource_class(self, body)
+
     def _format_body_data(self, body, response_key):
         if response_key:
             try:

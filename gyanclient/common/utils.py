@@ -131,8 +131,8 @@ def list_hosts(hosts):
 
 
 def list_models(models):
-    columns = ('uuid', 'name', 'type', 'status', 'state', 'deployed_url',
-               'deployed_on')
+    columns = ('id', 'name', 'status', 'ml_type', 'url',
+               'deployed')
     utils.print_list(models, columns,
                      {'versions': print_list_field('versions')},
                      sortby_index=None)

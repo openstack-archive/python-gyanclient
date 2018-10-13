@@ -99,18 +99,22 @@ def do_model_list(cs, args):
 @utils.arg('name',
            metavar='<name>',
            help='ID or name of the model to train')
-@utils.arg('--ml-file',
-           metavar='<ml_file>',
-           help='The ML model file to be trained')
-def do_train_model(cs, args):
-    """Remove security group for specified model."""
+@utils.arg('--trained-model',
+           metavar='<trained_model>',
+           help='Absolute path for trained models')
+@utils.arg('--type',
+           metavar='<type>',
+           help='Type of the ML model')
+def do_create_model(cs, args):
+    """Upload and create a trained model"""
     opts = {}
     opts['name'] = args.name
+    opts['type'] = args.type
     opts = gyan_utils.remove_null_parms(**opts)
     try:
-        opts['ml_file'] = yaml.load(open(args.ml_file)) 
-        models = cs.models.model_train(**opts)
-        gyan_utils.list_models(models)
+        opts['trained_model'] = open(args.trained_model, 'rb').read()
+        models = cs.models.model_create(**opts)
+        gyan_utils.list_models([models])
     except Exception as e:
         print("Creation of model %(model)s "
               "failed: %(e)s" % {'model': args.name, 'e': e})
