@@ -46,45 +46,36 @@ def do_model_delete(cs, args):
               {'model': args.model_id, 'e': e})
 
 
-@utils.arg('model-id',
+@utils.arg('model_id',
            metavar='<model-id>',
            help='ID or name of the model to show.')
 def do_model_show(cs, args):
     """Show details of a models."""
-    opts = {}
-    opts['model_id'] = args.model_id
-    opts = gyan_utils.remove_null_parms(**opts)
-    model = cs.models.get(**opts)
+    model = cs.models.get(args.model_id)
     _show_model(model)
 
 
-@utils.arg('model-id',
+@utils.arg('model_id',
            metavar='<model-id>',
            help='ID of the model to be deployed')
 def do_undeploy_model(cs, args):
     """Undeploy the model."""
-    opts = {}
-    opts['model_id'] = args.model_id
-    opts = gyan_utils.remove_null_parms(**opts)
     try:
-        model = cs.models.undeploy_model(**opts)
-        _show_model(model)
+        _, model = cs.models.undeploy_model(args.model_id)
+        utils.print_dict(model)
     except Exception as e:
         print("Undeployment of the model %(model)s "
               "failed: %(e)s" % {'model': args.model_id, 'e': e})
 
 
-@utils.arg('model-id',
+@utils.arg('model_id',
            metavar='<model-id>',
            help='ID of the model to be deployed')
 def do_deploy_model(cs, args):
     """Deploy already created model."""
-    opts = {}
-    opts['model_id'] = args.model_id
-    opts = gyan_utils.remove_null_parms(**opts)
     try:
-        model = cs.models.deploy_model(**opts)
-        _show_model(model)
+        _, model = cs.models.deploy_model(args.model_id)
+        utils.print_dict(model)
     except Exception as e:
         print("Deployment of the model %(model)s "
               "failed: %(e)s" % {'model': args.model_id, 'e': e})

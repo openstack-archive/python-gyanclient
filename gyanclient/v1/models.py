@@ -70,7 +70,7 @@ class ModelManager(base.Manager):
         return resp, body
 
     def deploy_model(self, id):
-        return self._action(id, '/deploy')
+        return self._action(id, '/deploy', 'GET')
 
     def undeploy_model(self, id):
-        return self._action(id, '/unstop')
+        return self._action(id, '/undeploy', 'GET')
