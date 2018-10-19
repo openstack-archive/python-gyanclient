@@ -28,17 +28,13 @@ def _show_model(model):
     utils.print_dict(model._info)
 
 
-@utils.arg('model-id',
+@utils.arg('model_id',
            metavar='<model-id>',
-           nargs='+',
            help='ID of the model to delete.')
 def do_model_delete(cs, args):
     """Delete specified model."""
-    opts = {}
-    opts['id'] = args.model_id
-    opts = gyan_utils.remove_null_parms(**opts)
     try:
-        cs.models.delete_model(**opts)
+        cs.models.delete_model(args.model_id)
         print("Request to delete model %s has been accepted." %
               args.model_id)
     except Exception as e:
