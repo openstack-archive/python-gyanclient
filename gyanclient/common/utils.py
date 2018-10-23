@@ -129,6 +129,13 @@ def list_hosts(hosts):
                      {'versions': print_list_field('versions')},
                      sortby_index=None)
 
+def list_flavors(flavors):
+    columns = ('id', 'name', 'driver', 'cpu', 'memory', 'disk')
+    utils.print_list(flavors, columns,
+                     {'versions': print_list_field('versions')},
+                     sortby_index=None)
+
+
 
 def list_models(models):
     columns = ('id', 'name', 'status', 'ml_type', 'url',

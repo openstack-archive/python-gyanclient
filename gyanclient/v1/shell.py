@@ -12,10 +12,12 @@
 
 from gyanclient.v1 import hosts_shell
 from gyanclient.v1 import models_shell
+from gyanclient.v1 import flavors_shell
 from gyanclient.v1 import versions_shell
 
 COMMAND_MODULES = [
     hosts_shell,
     models_shell,
+    flavors_shell,
     versions_shell
 ]
