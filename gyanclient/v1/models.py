@@ -54,6 +54,7 @@ class ModelManager(base.Manager):
         new = {}
         new["name"] = kwargs["name"]
         new["type"] = kwargs["type"]
+        new["flavor_id"] = kwargs["flavor_id"]
         model = self._create(self._path(), new)
         upload_trained_model = kwargs['trained_model']
         return self._create_and_upload(self._path(model.id)+'/upload_trained_model', upload_trained_model)

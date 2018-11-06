@@ -86,6 +86,9 @@ def do_model_list(cs, args):
 @utils.arg('name',
            metavar='<name>',
            help='ID or name of the model to train')
+@utils.arg('--flavor-id',
+           metavar='<flavor_id>',
+           help='ID or name of the model to train')
 @utils.arg('--trained-model',
            metavar='<trained_model>',
            help='Absolute path for trained models')
@@ -97,6 +100,7 @@ def do_create_model(cs, args):
     opts = {}
     opts['name'] = args.name
     opts['type'] = args.type
+    opts["flavor_id"] = args.flavor_id
     opts = gyan_utils.remove_null_parms(**opts)
     try:
         opts['trained_model'] = open(args.trained_model, 'rb').read()
