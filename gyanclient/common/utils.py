@@ -139,7 +139,7 @@ def list_flavors(flavors):
 
 def list_models(models):
     columns = ('id', 'name', 'status', 'ml_type', 'url',
-               'deployed')
+               'deployed_on')
     utils.print_list(models, columns,
                      {'versions': print_list_field('versions')},
                      sortby_index=None)
